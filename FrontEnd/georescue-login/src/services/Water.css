@@ -68,6 +68,32 @@ body {
     margin-bottom: 20px;
 }
 
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse; /* Merge borders of table cells */
+    margin-top: 20px; /* Space above the table */
+}
+
+th, td {
+    border: 1px solid #ccc; /* Light gray border for cells */
+    padding: 10px; /* Padding for cells */
+    text-align: left; /* Align text to the left */
+}
+
+th {
+    background-color: #f4f4f4; /* Light background for header */
+    font-weight: bold; /* Bold font for header */
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9; /* Light gray for even rows */
+}
+
+tr:hover {
+    background-color: #eaeaea; /* Highlight row on hover */
+}
+
 /* Save Data Section */
 .water-save {
     text-align: center;
