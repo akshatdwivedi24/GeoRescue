@@ -1,17 +1,12 @@
-import { useState } from 'react';
-import { Link as RouterLink, useLocation } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import {
   AppBar,
   Box,
   Toolbar,
   IconButton,
   Typography,
-  Menu,
-  Container,
-  Avatar,
   Button,
-  Tooltip,
-  MenuItem,
   Drawer,
   List,
   ListItem,
@@ -23,182 +18,186 @@ import {
 import {
   Menu as MenuIcon,
   Dashboard,
-  Warning,
+  Notifications,
   Report,
-  Home,
   LocalHospital,
-  Emergency,
-  Phone,
+  LocalPolice,
+  Contacts,
   Map,
+  Logout,
+  Login as LoginIcon,
 } from '@mui/icons-material';
+import { useAuth } from '../../contexts/AuthContext';
+import { toast } from 'react-toastify';
 
 const pages = [
   { name: 'Dashboard', path: '/', icon: <Dashboard /> },
-  { name: 'Alerts', path: '/alerts', icon: <Warning /> },
+  { name: 'Alerts', path: '/alerts', icon: <Notifications /> },
   { name: 'Incidents', path: '/incidents', icon: <Report /> },
-  { name: 'Shelters', path: '/shelters', icon: <Home /> },
-  { name: 'Rescue Operations', path: '/rescue-operations', icon: <Emergency /> },
-  { name: 'Emergency Contacts', path: '/emergency-contacts', icon: <Phone /> },
+  { name: 'Shelters', path: '/shelters', icon: <LocalHospital /> },
+  { name: 'Rescue Operations', path: '/rescue-operations', icon: <LocalPolice /> },
+  { name: 'Emergency Contacts', path: '/emergency-contacts', icon: <Contacts /> },
   { name: 'Map', path: '/map', icon: <Map /> },
 ];
 
-function Navbar() {
-  const [anchorElNav, setAnchorElNav] = useState(null);
-  const [anchorElUser, setAnchorElUser] = useState(null);
+const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const navigate = useNavigate();
   const location = useLocation();
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const { logout, isAuthenticated, user } = useAuth();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate('/login');
+      toast.success('Logged out successfully');
+    } catch (error) {
+      toast.error('Logout failed. Please try again.');
+      console.error('Logout failed:', error);
+    }
+  };
+
+  const handleLogin = () => {
+    navigate('/login');
+  };
+
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
+    <div>
+      <Toolbar>
+        <Typography variant="h6" noWrap component="div">
+          GeoRescue
+        </Typography>
+      </Toolbar>
       <List>
         {pages.map((page) => (
           <ListItem
+            button
             key={page.name}
-            component={RouterLink}
-            to={page.path}
-            selected={location.pathname === page.path}
-            sx={{
-              '&.Mui-selected': {
-                backgroundColor: 'primary.light',
-                color: 'primary.contrastText',
-                '&:hover': {
-                  backgroundColor: 'primary.main',
-                },
-              },
+            onClick={() => {
+              if (!isAuthenticated && page.path !== '/') {
+                toast.warning('Please login to access this feature');
+                navigate('/login');
+                return;
+              }
+              navigate(page.path);
+              if (isMobile) handleDrawerToggle();
             }}
           >
             <ListItemIcon>{page.icon}</ListItemIcon>
             <ListItemText primary={page.name} />
           </ListItem>
         ))}
+        {isAuthenticated ? (
+          <ListItem button onClick={handleLogout}>
+            <ListItemIcon>
+              <Logout />
+            </ListItemIcon>
+            <ListItemText primary="Logout" />
+          </ListItem>
+        ) : (
+          <ListItem button onClick={handleLogin}>
+            <ListItemIcon>
+              <LoginIcon />
+            </ListItemIcon>
+            <ListItemText primary="Login" />
+          </ListItem>
+        )}
       </List>
-    </Box>
+    </div>
   );
 
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          {isMobile && (
-            <IconButton
+    <AppBar position="fixed">
+      <Toolbar>
+        <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          edge="start"
+          onClick={handleDrawerToggle}
+          sx={{ mr: 2, display: { sm: 'none' } }}
+        >
+          <MenuIcon />
+        </IconButton>
+        <Typography
+          variant="h6"
+          noWrap
+          component="div"
+          sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+        >
+          GeoRescue
+        </Typography>
+        <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+          {pages.map((page) => (
+            <Button
+              key={page.name}
               color="inherit"
-              aria-label="open drawer"
-              edge="start"
-              onClick={handleDrawerToggle}
-              sx={{ mr: 2 }}
-            >
-              <MenuIcon />
-            </IconButton>
-          )}
-
-          <Typography
-            variant="h6"
-            noWrap
-            component={RouterLink}
-            to="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            GeoRescue
-          </Typography>
-
-          {!isMobile && (
-            <Box sx={{ flexGrow: 1, display: 'flex', gap: 2 }}>
-              {pages.map((page) => (
-                <Button
-                  key={page.name}
-                  component={RouterLink}
-                  to={page.path}
-                  startIcon={page.icon}
-                  sx={{
-                    color: 'white',
-                    my: 2,
-                    display: 'block',
-                    ...(location.pathname === page.path && {
-                      backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                    }),
-                  }}
-                >
-                  {page.name}
-                </Button>
-              ))}
-            </Box>
-          )}
-
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="User" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+              startIcon={page.icon}
+              onClick={() => {
+                if (!isAuthenticated && page.path !== '/') {
+                  toast.warning('Please login to access this feature');
+                  navigate('/login');
+                  return;
+                }
+                navigate(page.path);
               }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+              sx={{
+                mx: 1,
+                color: location.pathname === page.path ? 'white' : 'inherit',
+                '&:hover': {
+                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                },
               }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
             >
-              <MenuItem onClick={handleCloseUserMenu}>
-                <Typography textAlign="center">Profile</Typography>
-              </MenuItem>
-              <MenuItem onClick={handleCloseUserMenu}>
-                <Typography textAlign="center">Settings</Typography>
-              </MenuItem>
-              <MenuItem onClick={handleCloseUserMenu}>
-                <Typography textAlign="center">Logout</Typography>
-              </MenuItem>
-            </Menu>
-          </Box>
-        </Toolbar>
-      </Container>
+              {page.name}
+            </Button>
+          ))}
+          {isAuthenticated ? (
+            <Button
+              color="inherit"
+              startIcon={<Logout />}
+              onClick={handleLogout}
+              sx={{
+                ml: 1,
+                '&:hover': {
+                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                },
+              }}
+            >
+              Logout
+            </Button>
+          ) : (
+            <Button
+              color="inherit"
+              startIcon={<LoginIcon />}
+              onClick={handleLogin}
+              sx={{
+                ml: 1,
+                '&:hover': {
+                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                },
+              }}
+            >
+              Login
+            </Button>
+          )}
+        </Box>
+      </Toolbar>
       <Drawer
         variant="temporary"
         anchor="left"
         open={mobileOpen}
         onClose={handleDrawerToggle}
         ModalProps={{
-          keepMounted: true, // Better open performance on mobile.
+          keepMounted: true,
         }}
         sx={{
-          display: { xs: 'block', md: 'none' },
+          display: { xs: 'block', sm: 'none' },
           '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 240 },
         }}
       >
@@ -206,6 +205,6 @@ function Navbar() {
       </Drawer>
     </AppBar>
   );
-}
+};
 
 export default Navbar; 
