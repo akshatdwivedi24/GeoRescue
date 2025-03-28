@@ -1,0 +1,19 @@
+# Server Configuration
+server.port=8081
+
+# Google OAuth2 Configuration
+spring.security.oauth2.client.registration.google.client-id=${GOOGLE_CLIENT_ID}
+spring.security.oauth2.client.registration.google.client-secret=${GOOGLE_CLIENT_SECRET}
+spring.security.oauth2.client.registration.google.scope=email,profile
+spring.security.oauth2.client.registration.google.redirect-uri={baseUrl}/oauth2/callback/{registrationId}
+
+# Database Configuration
+spring.datasource.url=jdbc:postgresql://localhost:5432/georescue
+spring.datasource.username=${DB_USERNAME}
+spring.datasource.password=${DB_PASSWORD}
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+
+# Logging Configuration
+logging.level.org.springframework=INFO
+logging.level.com.georescue=DEBUG 
