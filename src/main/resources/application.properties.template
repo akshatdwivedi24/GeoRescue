@@ -1,0 +1,51 @@
+# Server Configuration
+server.port=8081
+server.servlet.context-path=/api
+
+# Database Configuration
+spring.datasource.url=jdbc:postgresql://localhost:5432/georescue
+spring.datasource.username=postgres
+spring.datasource.password=your_password_here
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+
+# JWT Configuration
+jwt.secret=your_jwt_secret_here
+jwt.expiration=86400000
+
+# Google OAuth2 Configuration
+spring.security.oauth2.client.registration.google.client-id=your_google_client_id_here
+spring.security.oauth2.client.registration.google.client-secret=your_google_client_secret_here
+spring.security.oauth2.client.registration.google.scope=profile,email
+
+# File Upload Configuration
+spring.servlet.multipart.max-file-size=10MB
+spring.servlet.multipart.max-request-size=10MB
+
+# Logging Configuration
+logging.level.org.springframework.security=DEBUG
+logging.level.com.georescue=DEBUG
+
+# Application Name
+spring.application.name=GeoRescue
+
+# Google OAuth2 Configuration
+spring.security.oauth2.client.registration.google.redirect-uri=http://localhost:8081/login/oauth2/code/google
+spring.security.oauth2.client.registration.google.client-name=Google
+spring.security.oauth2.client.registration.google.authorization-grant-type=authorization_code
+
+# OAuth2 Provider Configuration
+spring.security.oauth2.client.provider.google.authorization-uri=https://accounts.google.com/o/oauth2/v2/auth
+spring.security.oauth2.client.provider.google.token-uri=https://oauth2.googleapis.com/token
+spring.security.oauth2.client.provider.google.user-info-uri=https://www.googleapis.com/oauth2/v3/userinfo
+spring.security.oauth2.client.provider.google.user-name-attribute=email
+spring.security.oauth2.client.provider.google.jwk-set-uri=https://www.googleapis.com/oauth2/v3/certs
+
+# Security Configuration
+spring.security.oauth2.resourceserver.jwt.issuer-uri=https://accounts.google.com
+spring.security.oauth2.resourceserver.jwt.jwk-set-uri=https://www.googleapis.com/oauth2/v3/certs
+
+# Logging for OAuth2 debugging
+logging.level.org.springframework.security=DEBUG
+logging.level.org.springframework.security.oauth2=DEBUG
+logging.level.org.springframework.web=DEBUG
