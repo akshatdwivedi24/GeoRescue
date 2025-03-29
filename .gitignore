@@ -50,6 +50,9 @@ buildNumber.properties
 .env.test.local
 .env.production.local
 
+# Application properties for local development
+src/main/resources/application-local.properties
+
 # Node modules
 node_modules/
 
@@ -98,6 +101,3 @@ Thumbs.db
 /.nb-gradle/
 !**/src/main/**/build/
 !**/src/test/**/build/
-
-# Application properties with sensitive data
-src/main/resources/application-local.properties
