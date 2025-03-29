@@ -26,6 +26,9 @@ import {
   LinkedIn as LinkedInIcon,
   Language as LanguageIcon,
   Brightness4 as DarkModeIcon,
+  Search as SearchIcon,
+  Handshake as HandshakeIcon,
+  Groups as GroupsIcon,
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 
@@ -45,9 +48,29 @@ const ServiceCard = ({ icon, title, description, onClick }) => (
     onClick={onClick}
   >
     <CardContent>
-      <Box display="flex" alignItems="center" mb={2}>
-        {icon}
-        <Typography variant="h6" ml={1}>
+      <Box 
+        display="flex" 
+        alignItems="flex-start" 
+        mb={2}
+        sx={{ minHeight: '48px' }}
+      >
+        <Box sx={{ 
+          display: 'flex', 
+          alignItems: 'center',
+          width: '40px',
+          height: '40px',
+          mr: 2,
+          flexShrink: 0
+        }}>
+          {icon}
+        </Box>
+        <Typography 
+          variant="h6" 
+          sx={{ 
+            lineHeight: 1.2,
+            pt: 0.5
+          }}
+        >
           {title}
         </Typography>
       </Box>
@@ -178,25 +201,45 @@ const Home = () => {
       </Container>
 
       {/* Community Section */}
-      <Box sx={{ bgcolor: 'grey.100', py: 6 }}>
+      <Box sx={{ 
+        bgcolor: theme.palette.background.default,
+        py: 6,
+        borderTop: `1px solid ${theme.palette.divider}`,
+        borderBottom: `1px solid ${theme.palette.divider}`,
+      }}>
         <Container maxWidth="lg">
           <Typography variant="h4" gutterBottom align="center" sx={{ mb: 4 }}>
             Community & Support
           </Typography>
           <Grid container spacing={3}>
             <Grid item xs={12} md={4}>
-              <Card sx={{ height: '100%' }}>
-                <CardContent>
-                  <Typography variant="h6" gutterBottom>
-                    Missing Persons
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    Report or search for missing individuals during disasters.
-                  </Typography>
+              <Card sx={{ 
+                height: '100%', 
+                bgcolor: theme.palette.background.paper,
+                display: 'flex',
+                flexDirection: 'column'
+              }}>
+                <CardContent sx={{ 
+                  flexGrow: 1,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  height: '100%'
+                }}>
+                  <Box sx={{ flexGrow: 1 }}>
+                    <Box display="flex" alignItems="center" mb={2}>
+                      <SearchIcon fontSize="large" color="info" sx={{ mr: 1 }} />
+                      <Typography variant="h6">
+                        Missing Persons
+                      </Typography>
+                    </Box>
+                    <Typography variant="body2" color="text.secondary" paragraph>
+                      Report or search for missing individuals during disasters.
+                    </Typography>
+                  </Box>
                   <Button
                     variant="outlined"
                     color="primary"
-                    sx={{ mt: 2 }}
+                    fullWidth
                     onClick={() => navigate('/missing-persons')}
                   >
                     Learn More
@@ -205,18 +248,33 @@ const Home = () => {
               </Card>
             </Grid>
             <Grid item xs={12} md={4}>
-              <Card sx={{ height: '100%' }}>
-                <CardContent>
-                  <Typography variant="h6" gutterBottom>
-                    Request Aid
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    Submit requests for emergency supplies or assistance.
-                  </Typography>
+              <Card sx={{ 
+                height: '100%', 
+                bgcolor: theme.palette.background.paper,
+                display: 'flex',
+                flexDirection: 'column'
+              }}>
+                <CardContent sx={{ 
+                  flexGrow: 1,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  height: '100%'
+                }}>
+                  <Box sx={{ flexGrow: 1 }}>
+                    <Box display="flex" alignItems="center" mb={2}>
+                      <HandshakeIcon fontSize="large" color="warning" sx={{ mr: 1 }} />
+                      <Typography variant="h6">
+                        Request Aid
+                      </Typography>
+                    </Box>
+                    <Typography variant="body2" color="text.secondary" paragraph>
+                      Submit requests for emergency supplies or assistance.
+                    </Typography>
+                  </Box>
                   <Button
                     variant="outlined"
                     color="primary"
-                    sx={{ mt: 2 }}
+                    fullWidth
                     onClick={() => navigate('/request-aid')}
                   >
                     Request Now
@@ -225,18 +283,33 @@ const Home = () => {
               </Card>
             </Grid>
             <Grid item xs={12} md={4}>
-              <Card sx={{ height: '100%' }}>
-                <CardContent>
-                  <Typography variant="h6" gutterBottom>
-                    Volunteer Network
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    Connect with local volunteers and response teams.
-                  </Typography>
+              <Card sx={{ 
+                height: '100%', 
+                bgcolor: theme.palette.background.paper,
+                display: 'flex',
+                flexDirection: 'column'
+              }}>
+                <CardContent sx={{ 
+                  flexGrow: 1,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  height: '100%'
+                }}>
+                  <Box sx={{ flexGrow: 1 }}>
+                    <Box display="flex" alignItems="center" mb={2}>
+                      <GroupsIcon fontSize="large" color="success" sx={{ mr: 1 }} />
+                      <Typography variant="h6">
+                        Volunteer Network
+                      </Typography>
+                    </Box>
+                    <Typography variant="body2" color="text.secondary" paragraph>
+                      Connect with local volunteers and response teams.
+                    </Typography>
+                  </Box>
                   <Button
                     variant="outlined"
                     color="primary"
-                    sx={{ mt: 2 }}
+                    fullWidth
                     onClick={() => navigate('/volunteer-network')}
                   >
                     Join Network
