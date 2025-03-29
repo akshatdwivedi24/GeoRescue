@@ -19,6 +19,7 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTheme as useCustomTheme } from '../../contexts/ThemeContext';
+import AboutAuthor from '../AboutAuthor';
 
 const pages = [
   { title: 'Map', path: '/map' },
@@ -184,6 +185,9 @@ function Navbar() {
 
           {/* User menu */}
           <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center', gap: 2 }}>
+            {/* About Author */}
+            <AboutAuthor />
+            
             {/* Dark Mode Toggle */}
             <Tooltip title={darkMode ? "Light Mode" : "Dark Mode"}>
               <Switch
