@@ -14,9 +14,11 @@ import {
   MenuItem,
   useTheme,
   useMediaQuery,
+  Switch,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useAuth } from '../../contexts/AuthContext';
+import { useTheme as useCustomTheme } from '../../contexts/ThemeContext';
 
 const pages = [
   { title: 'Map', path: '/map' },
@@ -34,6 +36,7 @@ function Navbar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const { user, logout } = useAuth();
+  const { darkMode, toggleDarkMode } = useCustomTheme();
   const navigate = useNavigate();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
@@ -180,7 +183,24 @@ function Navbar() {
           </Box>
 
           {/* User menu */}
-          <Box sx={{ flexGrow: 0 }}>
+          <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center', gap: 2 }}>
+            {/* Dark Mode Toggle */}
+            <Tooltip title={darkMode ? "Light Mode" : "Dark Mode"}>
+              <Switch
+                checked={darkMode}
+                onChange={toggleDarkMode}
+                color="default"
+                sx={{
+                  '& .MuiSwitch-thumb': {
+                    backgroundColor: 'white',
+                  },
+                  '& .MuiSwitch-track': {
+                    backgroundColor: 'rgba(255, 255, 255, 0.3)',
+                  },
+                }}
+              />
+            </Tooltip>
+
             {user ? (
               <>
                 <Tooltip title="Open settings">
