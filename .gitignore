@@ -52,6 +52,7 @@ buildNumber.properties
 
 # Application properties for local development
 src/main/resources/application-local.properties
+src/main/resources/application.properties
 
 # Node modules
 node_modules/
@@ -98,6 +99,3 @@ Thumbs.db
 /nbbuild/
 /dist/
 /nbdist/
-/.nb-gradle/
-!**/src/main/**/build/
-!**/src/test/**/build/

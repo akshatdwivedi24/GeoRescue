@@ -11,6 +11,10 @@ import {
   Typography,
   useTheme,
   useMediaQuery,
+<<<<<<< HEAD
+=======
+  Divider,
+>>>>>>> f413697f7f254aaea7e4db168fb1dd6f0cdc1431
 } from '@mui/material';
 import {
   NotificationsActive as AlertIcon,
@@ -29,8 +33,18 @@ import {
   Search as SearchIcon,
   Handshake as HandshakeIcon,
   Groups as GroupsIcon,
+<<<<<<< HEAD
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
+=======
+  AccountBalance as DonationIcon,
+} from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
+import EmergencyReport from '../components/emergency/EmergencyReport';
+import ShelterFinder from '../components/shelter/ShelterFinder';
+import MissingPersonFinder from '../components/missing/MissingPersonFinder';
+import DonationManager from '../components/donation/DonationManager';
+>>>>>>> f413697f7f254aaea7e4db168fb1dd6f0cdc1431
 
 const ServiceCard = ({ icon, title, description, onClick }) => (
   <Card 
@@ -159,6 +173,7 @@ const Home = () => {
         </Container>
       </Paper>
 
+<<<<<<< HEAD
       {/* Services Section */}
       <Container maxWidth="lg" sx={{ mb: 6 }}>
         <Typography variant="h4" gutterBottom align="center" sx={{ mb: 4 }}>
@@ -198,6 +213,44 @@ const Home = () => {
             />
           </Grid>
         </Grid>
+=======
+      {/* Emergency Reporting Section */}
+      <Container maxWidth="lg" sx={{ mb: 6 }}>
+        <Typography variant="h4" gutterBottom align="center" sx={{ mb: 4 }}>
+          Emergency Reporting
+        </Typography>
+        <EmergencyReport />
+      </Container>
+
+      <Divider sx={{ my: 6 }} />
+
+      {/* Shelter Finder Section */}
+      <Container maxWidth="lg" sx={{ mb: 6 }}>
+        <Typography variant="h4" gutterBottom align="center" sx={{ mb: 4 }}>
+          Find Nearby Shelters
+        </Typography>
+        <ShelterFinder />
+      </Container>
+
+      <Divider sx={{ my: 6 }} />
+
+      {/* Missing Person Finder Section */}
+      <Container maxWidth="lg" sx={{ mb: 6 }}>
+        <Typography variant="h4" gutterBottom align="center" sx={{ mb: 4 }}>
+          Missing Person Finder
+        </Typography>
+        <MissingPersonFinder />
+      </Container>
+
+      <Divider sx={{ my: 6 }} />
+
+      {/* Donation & Relief Funds Section */}
+      <Container maxWidth="lg" sx={{ mb: 6 }}>
+        <Typography variant="h4" gutterBottom align="center" sx={{ mb: 4 }}>
+          Donation & Relief Funds
+        </Typography>
+        <DonationManager />
+>>>>>>> f413697f7f254aaea7e4db168fb1dd6f0cdc1431
       </Container>
 
       {/* Community Section */}
@@ -205,7 +258,10 @@ const Home = () => {
         bgcolor: theme.palette.background.default,
         py: 6,
         borderTop: `1px solid ${theme.palette.divider}`,
+<<<<<<< HEAD
         borderBottom: `1px solid ${theme.palette.divider}`,
+=======
+>>>>>>> f413697f7f254aaea7e4db168fb1dd6f0cdc1431
       }}>
         <Container maxWidth="lg">
           <Typography variant="h4" gutterBottom align="center" sx={{ mb: 4 }}>
@@ -262,6 +318,7 @@ const Home = () => {
                 }}>
                   <Box sx={{ flexGrow: 1 }}>
                     <Box display="flex" alignItems="center" mb={2}>
+<<<<<<< HEAD
                       <HandshakeIcon fontSize="large" color="warning" sx={{ mr: 1 }} />
                       <Typography variant="h6">
                         Request Aid
@@ -269,15 +326,30 @@ const Home = () => {
                     </Box>
                     <Typography variant="body2" color="text.secondary" paragraph>
                       Submit requests for emergency supplies or assistance.
+=======
+                      <HandshakeIcon fontSize="large" color="success" sx={{ mr: 1 }} />
+                      <Typography variant="h6">
+                        Volunteer Opportunities
+                      </Typography>
+                    </Box>
+                    <Typography variant="body2" color="text.secondary" paragraph>
+                      Join our community of volunteers and make a difference.
+>>>>>>> f413697f7f254aaea7e4db168fb1dd6f0cdc1431
                     </Typography>
                   </Box>
                   <Button
                     variant="outlined"
                     color="primary"
                     fullWidth
+<<<<<<< HEAD
                     onClick={() => navigate('/request-aid')}
                   >
                     Request Now
+=======
+                    onClick={() => navigate('/volunteer')}
+                  >
+                    Get Involved
+>>>>>>> f413697f7f254aaea7e4db168fb1dd6f0cdc1431
                   </Button>
                 </CardContent>
               </Card>
@@ -297,6 +369,7 @@ const Home = () => {
                 }}>
                   <Box sx={{ flexGrow: 1 }}>
                     <Box display="flex" alignItems="center" mb={2}>
+<<<<<<< HEAD
                       <GroupsIcon fontSize="large" color="success" sx={{ mr: 1 }} />
                       <Typography variant="h6">
                         Volunteer Network
@@ -304,15 +377,30 @@ const Home = () => {
                     </Box>
                     <Typography variant="body2" color="text.secondary" paragraph>
                       Connect with local volunteers and response teams.
+=======
+                      <DonationIcon fontSize="large" color="primary" sx={{ mr: 1 }} />
+                      <Typography variant="h6">
+                        Support Relief Efforts
+                      </Typography>
+                    </Box>
+                    <Typography variant="body2" color="text.secondary" paragraph>
+                      Contribute to disaster relief and recovery initiatives.
+>>>>>>> f413697f7f254aaea7e4db168fb1dd6f0cdc1431
                     </Typography>
                   </Box>
                   <Button
                     variant="outlined"
                     color="primary"
                     fullWidth
+<<<<<<< HEAD
                     onClick={() => navigate('/volunteer-network')}
                   >
                     Join Network
+=======
+                    onClick={() => navigate('/donate')}
+                  >
+                    Donate Now
+>>>>>>> f413697f7f254aaea7e4db168fb1dd6f0cdc1431
                   </Button>
                 </CardContent>
               </Card>
@@ -321,6 +409,7 @@ const Home = () => {
         </Container>
       </Box>
 
+<<<<<<< HEAD
       {/* Donation Section */}
       <Container maxWidth="lg" sx={{ my: 6 }}>
         <Paper
@@ -376,6 +465,39 @@ const Home = () => {
                 Connect With Us
               </Typography>
               <Box>
+=======
+      {/* Footer */}
+      <Box sx={{ 
+        bgcolor: theme.palette.background.paper,
+        py: 4,
+        borderTop: `1px solid ${theme.palette.divider}`,
+      }}>
+        <Container maxWidth="lg">
+          <Grid container spacing={4}>
+            <Grid item xs={12} sm={4}>
+              <Typography variant="h6" gutterBottom>
+                About GeoRescue
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                A comprehensive disaster management system helping communities stay safe and connected during emergencies.
+              </Typography>
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <Typography variant="h6" gutterBottom>
+                Quick Links
+              </Typography>
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                <Button color="inherit" onClick={() => navigate('/about')}>About Us</Button>
+                <Button color="inherit" onClick={() => navigate('/contact')}>Contact</Button>
+                <Button color="inherit" onClick={() => navigate('/faq')}>FAQ</Button>
+              </Box>
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <Typography variant="h6" gutterBottom>
+                Connect With Us
+              </Typography>
+              <Box sx={{ display: 'flex', gap: 2 }}>
+>>>>>>> f413697f7f254aaea7e4db168fb1dd6f0cdc1431
                 <IconButton color="inherit">
                   <FacebookIcon />
                 </IconButton>
@@ -388,6 +510,7 @@ const Home = () => {
               </Box>
             </Grid>
           </Grid>
+<<<<<<< HEAD
           <Box sx={{ mt: 4, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <Typography variant="body2">
               © 2024 GeoRescue. All rights reserved.
@@ -401,6 +524,8 @@ const Home = () => {
               </IconButton>
             </Box>
           </Box>
+=======
+>>>>>>> f413697f7f254aaea7e4db168fb1dd6f0cdc1431
         </Container>
       </Box>
     </Box>
